@@ -43,7 +43,7 @@ export const activeLearningItems: LearningItem[] = [
 
 export const LearningJourney: React.FC = () => {
   return (
-    <section className="py-20 relative">
+    <section id="learning" className="py-20 relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

@@ -9,6 +9,7 @@ import { LearningJourney } from './components/LearningJourney';
 import { GitHubSection } from './components/GitHubSection';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
+import { AIAssistant } from './components/AIAssistant/AIAssistant';
 
 export function App() {
   const [activeSection, setActiveSection] = useState('home');
@@ -51,6 +52,7 @@ export function App() {
       </main>
 
       <Footer />
+      <AIAssistant />
     </div>
   );
 }

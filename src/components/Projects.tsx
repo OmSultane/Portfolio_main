@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { projectsData } from '../data/projects';
 import type { Project } from '../data/projects';
 import { ProjectModal } from './ProjectModal';
@@ -7,6 +7,22 @@ import { ExternalLink, Info, MapPin, FolderSearch, Binary } from 'lucide-react';
 
 export const Projects: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
+  useEffect(() => {
+    const handleOpenModal = (event: Event) => {
+      const customEvent = event as CustomEvent<{ projectId: string }>;
+      const targetId = customEvent.detail?.projectId;
+      if (targetId) {
+        const found = projectsData.find((p) => p.id === targetId);
+        if (found) {
+          setSelectedProject(found);
+        }
+      }
+    };
+
+    window.addEventListener('open-project-modal', handleOpenModal);
+    return () => window.removeEventListener('open-project-modal', handleOpenModal);
+  }, []);
 
   const getProjectGraphic = (id: string) => {
     switch (id) {
@@ -132,7 +148,8 @@ export const Projects: React.FC = () => {
           {projectsData.map((project) => (
             <div
               key={project.id}
-              className="group rounded-2xl bg-[#0c0f1a] border border-white/[0.07] hover:border-indigo-500/40 flex flex-col justify-between transition-all duration-300 hover:shadow-xl hover:shadow-indigo-950/20"
+              id={`project-${project.id}`}
+              className="group rounded-2xl bg-[#0c0f1a] border border-white/[0.07] hover:border-indigo-500/40 flex flex-col justify-between transition-all duration-300 hover:shadow-xl hover:shadow-indigo-950/20 scroll-mt-28"
             >
               <div>
                 {/* Visual Header */}

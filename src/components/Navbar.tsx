@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { portfolioConfig } from '../config/portfolio';
 import { GithubIcon, LinkedinIcon, LeetCodeIcon, CodeChefIcon } from './Icons';
 import { Menu, X, FileDown, Code2 } from 'lucide-react';
+import { ThemeToggle } from './ThemeToggle';
 
 interface NavbarProps {
   activeSection: string;
@@ -140,16 +141,21 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
               <span>Resume</span>
             </a>
           )}
+          {/* Theme Toggle */}
+          <ThemeToggle className="ml-1" />
         </div>
 
-        {/* Mobile Hamburger Button */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/[0.05] border border-white/[0.08]"
-          aria-label="Toggle navigation menu"
-        >
-          {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
+        {/* Mobile Header Actions */}
+        <div className="md:hidden flex items-center gap-2">
+          <ThemeToggle />
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="p-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/[0.05] border border-white/[0.08]"
+            aria-label="Toggle navigation menu"
+          >
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu Dropdown */}
@@ -235,6 +241,11 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
                 <span>Get in Touch</span>
               </a>
             )}
+          </div>
+
+          <div className="mt-3 pt-3 border-t border-white/[0.08] flex items-center justify-between">
+            <span className="text-xs text-slate-400 font-medium">Appearance</span>
+            <ThemeToggle showLabel />
           </div>
         </div>
       )}

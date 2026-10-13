@@ -29,7 +29,7 @@ export const GitHubSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-20 relative bg-[#06080d]/60 border-y border-white/[0.04]">
+    <section id="github" className="py-20 relative bg-[#06080d]/60 border-y border-white/[0.04]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
