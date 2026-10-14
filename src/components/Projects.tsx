@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { projectsData } from '../data/projects';
 import type { Project } from '../data/projects';
+import { ProjectCard } from './ProjectCard';
 import { ProjectModal } from './ProjectModal';
-import { GithubIcon } from './Icons';
-import { ExternalLink, Info, MapPin, FolderSearch, Binary } from 'lucide-react';
+import { MapPin, FolderSearch, Binary } from 'lucide-react';
 
 export const Projects: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -130,7 +130,7 @@ export const Projects: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="mb-12">
+        <div className="mb-12 reveal-on-scroll">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-mono uppercase tracking-wider mb-3">
             Portfolio Work
           </div>
@@ -143,95 +143,16 @@ export const Projects: React.FC = () => {
           <div className="w-16 h-1 bg-indigo-500 rounded-full mt-4"></div>
         </div>
 
-        {/* Project Cards Grid */}
+        {/* Project Cards Grid with 3D Tilt and Cursor Spotlight */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
-          {projectsData.map((project) => (
-            <div
+          {projectsData.map((project, idx) => (
+            <ProjectCard
               key={project.id}
-              id={`project-${project.id}`}
-              className="group rounded-2xl bg-[#0c0f1a] border border-white/[0.07] hover:border-indigo-500/40 flex flex-col justify-between transition-all duration-300 hover:shadow-xl hover:shadow-indigo-950/20 scroll-mt-28"
-            >
-              <div>
-                {/* Visual Header */}
-                {getProjectGraphic(project.id)}
-
-                {/* Body Content */}
-                <div className="p-6">
-                  
-                  {/* Category & Badge */}
-                  <div className="flex items-center justify-between gap-2 mb-2.5">
-                    <span className="text-[11px] font-mono font-medium text-indigo-400">
-                      {project.category}
-                    </span>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-slate-400 border border-white/[0.06]">
-                      {project.statusBadge}
-                    </span>
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="text-lg font-bold text-white group-hover:text-indigo-300 transition-colors mb-2">
-                    {project.title}
-                  </h3>
-
-                  {/* Short Description */}
-                  <p className="text-xs text-slate-400 leading-relaxed line-clamp-3 mb-4">
-                    {project.description}
-                  </p>
-
-                  {/* Tech Badges */}
-                  <div className="flex flex-wrap gap-1.5 mb-6">
-                    {project.technologies.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-2 py-0.5 text-[11px] font-mono rounded bg-white/[0.03] border border-white/[0.06] text-slate-300"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                </div>
-              </div>
-
-              {/* Action Buttons Footer */}
-              <div className="px-6 pb-6 pt-2 border-t border-white/[0.05] flex items-center justify-between gap-2">
-                
-                {/* GitHub Link */}
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] text-slate-300 hover:text-white border border-white/[0.08] text-xs font-medium transition-colors"
-                >
-                  <GithubIcon className="w-3.5 h-3.5" />
-                  <span>GitHub</span>
-                </a>
-
-                {/* Optional Live Demo Link */}
-                {project.liveDemoUrl && (
-                  <a
-                    href={project.liveDemoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 border border-indigo-500/30 text-xs font-medium transition-colors"
-                  >
-                    <ExternalLink className="w-3.5 h-3.5" />
-                    <span>Demo</span>
-                  </a>
-                )}
-
-                {/* View Details Modal Trigger */}
-                <button
-                  onClick={() => setSelectedProject(project)}
-                  className="inline-flex items-center gap-1 px-3 py-2 rounded-lg text-xs font-medium text-slate-400 hover:text-white hover:bg-white/[0.04] transition-colors ml-auto"
-                >
-                  <Info className="w-3.5 h-3.5 text-indigo-400" />
-                  <span>Details</span>
-                </button>
-
-              </div>
-
-            </div>
+              project={project}
+              graphic={getProjectGraphic(project.id)}
+              staggerIndex={idx}
+              onOpenDetails={setSelectedProject}
+            />
           ))}
         </div>
 

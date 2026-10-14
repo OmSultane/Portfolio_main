@@ -1,9 +1,56 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { portfolioConfig } from '../config/portfolio';
 import { GithubIcon, LinkedinIcon, LeetCodeIcon, CodeChefIcon } from './Icons';
 import { ArrowRight, Mail, Terminal, Sparkles, Database, Layers, Coffee } from 'lucide-react';
+import { useReducedMotion } from '../hooks/useReducedMotion';
+
+const ROLES = [
+  "Computer Engineering Student",
+  "Aspiring Software Engineer",
+  "Java & Backend Enthusiast",
+  "Problem Solver & Tech Explorer"
+];
 
 export const Hero: React.FC = () => {
+  const prefersReducedMotion = useReducedMotion();
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [displayedText, setDisplayedText] = useState(() =>
+    prefersReducedMotion ? portfolioConfig.personal.headline : ROLES[0]
+  );
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      return;
+    }
+
+    const currentRole = ROLES[roleIndex];
+    let timeoutId: ReturnType<typeof setTimeout>;
+
+    if (!isDeleting && displayedText === currentRole) {
+      // Pause at full word before deleting
+      timeoutId = setTimeout(() => setIsDeleting(true), 2000);
+    } else if (isDeleting && displayedText === '') {
+      // Finished deleting, brief pause before typing next role
+      timeoutId = setTimeout(() => {
+        setIsDeleting(false);
+        setRoleIndex((prev) => (prev + 1) % ROLES.length);
+      }, 300);
+    } else {
+      // Typing or deleting characters
+      const speed = isDeleting ? 28 : 65;
+      timeoutId = setTimeout(() => {
+        setDisplayedText((prev) =>
+          isDeleting
+            ? currentRole.substring(0, prev.length - 1)
+            : currentRole.substring(0, prev.length + 1)
+        );
+      }, speed);
+    }
+
+    return () => clearTimeout(timeoutId);
+  }, [displayedText, isDeleting, roleIndex, prefersReducedMotion]);
+
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -12,8 +59,8 @@ export const Hero: React.FC = () => {
   return (
     <section id="home" className="relative min-h-[92vh] flex items-center pt-28 pb-16 overflow-hidden">
       {/* Subtle Ambient Background Glows */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[360px] bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none -z-10" />
-      <div className="absolute top-1/3 right-10 w-[300px] h-[300px] bg-violet-600/10 rounded-full blur-[100px] pointer-events-none -z-10" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[360px] bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none -z-10 animate-ambient-drift" />
+      <div className="absolute top-1/3 right-10 w-[300px] h-[300px] bg-violet-600/10 rounded-full blur-[100px] pointer-events-none -z-10 animate-ambient-drift" style={{ animationDelay: '-6s' }} />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
@@ -23,7 +70,10 @@ export const Hero: React.FC = () => {
             
             {/* Availability Badge */}
             {portfolioConfig.personal.availability.isAvailable && (
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-950/40 border border-emerald-500/20 text-emerald-400 text-xs font-medium mb-6 shadow-sm">
+              <div 
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-950/40 border border-emerald-500/20 text-emerald-400 text-xs font-medium mb-6 shadow-sm animate-hero-fade"
+                style={{ animationDelay: '50ms' }}
+              >
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -33,30 +83,56 @@ export const Hero: React.FC = () => {
             )}
 
             {/* Small Introduction */}
-            <span className="text-xs uppercase tracking-[0.25em] font-semibold text-indigo-400 mb-2">
+            <span 
+              className="text-xs uppercase tracking-[0.25em] font-semibold text-indigo-400 mb-2 animate-hero-fade"
+              style={{ animationDelay: '100ms' }}
+            >
               HELLO, I'M
             </span>
 
-            {/* Main Heading */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-4">
-              {portfolioConfig.personal.name}
+            {/* Main Heading with Animated Gradient Text */}
+            <h1 
+              className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-3 animate-hero-fade"
+              style={{ animationDelay: '160ms' }}
+            >
+              <span className="bg-gradient-to-r from-white via-indigo-100 to-indigo-300 dark:from-white dark:via-indigo-200 dark:to-indigo-400 bg-clip-text text-transparent animate-gradient-text inline-block">
+                {portfolioConfig.personal.name}
+              </span>
             </h1>
 
-            {/* Professional Headline */}
-            <h2 className="text-lg sm:text-xl font-medium text-slate-300 mb-5 flex items-center gap-2">
-              <span>{portfolioConfig.personal.headline}</span>
-            </h2>
+            {/* Animated Subtitle / Typewriter Role */}
+            <div 
+              className="text-lg sm:text-xl font-medium text-slate-300 mb-5 flex items-center gap-2 min-h-[32px] animate-hero-fade"
+              style={{ animationDelay: '220ms' }}
+              aria-live="polite"
+            >
+              <span className="text-indigo-400 font-mono text-base">&gt;</span>
+              <span className="text-slate-200 font-mono text-sm sm:text-base">
+                {displayedText}
+              </span>
+              {!prefersReducedMotion && (
+                <span 
+                  className="inline-block w-1.5 h-4.5 bg-indigo-400 animate-pulse ml-0.5 rounded-xs" 
+                  aria-hidden="true" 
+                />
+              )}
+              <span className="sr-only">{portfolioConfig.personal.headline}</span>
+            </div>
 
             {/* Supporting Description */}
-            <p className="text-base text-slate-400 leading-relaxed max-w-xl mb-8">
+            <p 
+              className="text-base text-slate-400 leading-relaxed max-w-xl mb-8 animate-hero-fade"
+              style={{ animationDelay: '300ms' }}
+            >
               {portfolioConfig.personal.bio}
             </p>
 
-            {/* CTA Buttons */}
+            {/* CTA Buttons with Staggered Delays */}
             <div className="flex flex-wrap items-center gap-3.5 mb-10">
               <button
                 onClick={() => scrollTo('projects')}
-                className="group inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold transition-all shadow-lg shadow-indigo-600/20 hover:shadow-indigo-600/30"
+                className="group inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold transition-all shadow-lg shadow-indigo-600/20 hover:shadow-indigo-600/30 hover:scale-[1.02] active:scale-[0.98] animate-hero-fade cursor-pointer"
+                style={{ animationDelay: '380ms' }}
               >
                 <span>Explore My Projects</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -64,7 +140,8 @@ export const Hero: React.FC = () => {
 
               <button
                 onClick={() => scrollTo('contact')}
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-slate-200 hover:text-white border border-white/[0.09] text-sm font-semibold transition-all"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-slate-200 hover:text-white border border-white/[0.09] text-sm font-semibold transition-all hover:scale-[1.02] active:scale-[0.98] animate-hero-fade cursor-pointer"
+                style={{ animationDelay: '460ms' }}
               >
                 <Mail className="w-4 h-4 text-slate-400" />
                 <span>Let's Connect</span>
@@ -72,7 +149,10 @@ export const Hero: React.FC = () => {
             </div>
 
             {/* Social Links & Location Quick Info */}
-            <div className="flex flex-wrap items-center gap-4 text-xs text-slate-400">
+            <div 
+              className="flex flex-wrap items-center gap-4 text-xs text-slate-400 animate-hero-fade"
+              style={{ animationDelay: '520ms' }}
+            >
               <span className="font-mono text-slate-400">Profiles:</span>
               <div className="flex items-center gap-2">
                 <a
@@ -122,12 +202,12 @@ export const Hero: React.FC = () => {
 
           </div>
 
-          {/* Right Column: Abstract Developer Card (No fake portrait) */}
-          <div className="lg:col-span-5">
-            <div className="relative mx-auto max-w-md lg:max-w-none">
+          {/* Right Column: Abstract Developer Card */}
+          <div className="lg:col-span-5 animate-hero-fade" style={{ animationDelay: '280ms' }}>
+            <div className="relative mx-auto max-w-md lg:max-w-none animate-subtle-float">
               
               {/* Outer decorative card frame */}
-              <div className="relative rounded-2xl bg-[#0d101d]/90 border border-white/[0.09] p-5 shadow-2xl backdrop-blur-md">
+              <div className="relative rounded-2xl bg-[#0d101d]/90 border border-white/[0.09] p-5 shadow-2xl backdrop-blur-md transition-shadow hover:shadow-indigo-500/10">
                 
                 {/* Header with mock window controls */}
                 <div className="flex items-center justify-between pb-3.5 mb-3.5 border-b border-white/[0.06]">

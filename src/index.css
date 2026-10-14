@@ -21,7 +21,7 @@
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.25s ease, color 0.25s ease;
   }
 }
 
@@ -70,6 +70,7 @@
 
 /* ========================================================
    LIGHT THEME DESIGN SYSTEM OVERRIDES
+   Completely removes muddy black/dark backgrounds in light mode
    ======================================================== */
 html.light {
   color-scheme: light;
@@ -82,39 +83,110 @@ html.light body {
 }
 
 /* Base background classes */
-html.light .bg-\[\#07090e\] {
+html.light .bg-\[\#07090e\],
+html.light .bg-\[\#07090e\]\/85 {
   background-color: #f8fafc !important;
 }
 
-html.light .bg-\[\#07090e\]\/85 {
-  background-color: rgba(255, 255, 255, 0.88) !important;
+html.light header.bg-\[\#07090e\]\/85 {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04) !important;
 }
 
+/* Alternating section bands */
 html.light .bg-\[\#06080d\]\/60 {
   background-color: #f1f5f9 !important;
+  border-color: #e2e8f0 !important;
 }
 
+/* Footer in Light Mode */
+html.light footer,
+html.light .bg-\[\#05060a\] {
+  background-color: #eef2f6 !important;
+  border-top: 1px solid #e2e8f0 !important;
+}
+
+html.light footer .border-white\/\[0\.05\] {
+  border-color: #cbd5e1 !important;
+}
+
+/* Mobile dropdown menu */
 html.light .bg-\[\#0a0d17\]\/95 {
   background-color: rgba(255, 255, 255, 0.98) !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08) !important;
 }
 
-/* Card surfaces */
+/* Main Card Surfaces */
 html.light .bg-\[\#0c0f1a\],
+html.light .bg-\[\#0c0f1a\]\/80,
 html.light .bg-\[\#0e111d\],
 html.light .bg-\[\#101422\],
+html.light .bg-\[\#0f121e\]\/80,
+html.light .bg-\[\#0f121e\],
 html.light .bg-\[\#0a0d18\] {
   background-color: #ffffff !important;
-  box-shadow: 0 4px 12px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -2px rgba(15, 23, 42, 0.04);
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 4px 12px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -2px rgba(15, 23, 42, 0.03) !important;
 }
 
+/* Glass cards */
 html.light .card-glass {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.9);
   border-color: #e2e8f0;
   box-shadow: 0 4px 12px -2px rgba(15, 23, 42, 0.06);
 }
 
 html.light .card-glass:hover {
   border-color: rgba(99, 102, 241, 0.4);
+}
+
+/* Hero Code Window Container & Title Bar */
+html.light .bg-\[\#090b14\] {
+  background-color: #f1f5f9 !important;
+  border-color: #e2e8f0 !important;
+}
+
+/* Black simulation code terminal boxes */
+html.light .bg-black\/30,
+html.light .bg-black\/40 {
+  background-color: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+  color: #1e293b !important;
+}
+
+/* Projects Visual Header Gradients in Light Mode */
+html.light [class*="from-indigo-950"] {
+  background: linear-gradient(135deg, #eef2ff 0%, #f1f5f9 60%, #ffffff 100%) !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+
+html.light [class*="from-cyan-950"] {
+  background: linear-gradient(135deg, #ecfeff 0%, #f1f5f9 60%, #ffffff 100%) !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+
+html.light [class*="from-amber-950"] {
+  background: linear-gradient(135deg, #fffbeb 0%, #f1f5f9 60%, #ffffff 100%) !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+
+/* Skills Featured Active Learning Card */
+html.light [class*="from-[#101426]"] {
+  background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%) !important;
+  border-color: #fed7aa !important;
+}
+
+/* Experience timeline icons */
+html.light .bg-\[\#0f1325\],
+html.light .bg-\[\#101925\] {
+  background-color: #ffffff !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08) !important;
+}
+
+html.light .border-l.border-white\/\[0\.1\] {
+  border-color: #cbd5e1 !important;
 }
 
 /* Grid patterns in light mode */
@@ -128,7 +200,14 @@ html.light .bg-dot-pattern {
   background-image: radial-gradient(rgba(15, 23, 42, 0.08) 1px, transparent 1px);
 }
 
-/* Text adjustments for light mode */
+/* Ambient glow blobs in light mode */
+html.light .bg-indigo-600\/10,
+html.light .bg-violet-600\/10,
+html.light .bg-cyan-500\/10 {
+  opacity: 0.25;
+}
+
+/* Typography in Light Mode */
 html.light .text-white {
   color: #0f172a !important;
 }
@@ -149,24 +228,56 @@ html.light .text-slate-400 {
   color: #64748b !important;
 }
 
-/* Preserve bright text inside dark buttons (e.g. indigo buttons) */
+/* Accent Badges in Light Mode */
+html.light .bg-emerald-950\/40 {
+  background-color: #ecfdf5 !important;
+  border-color: #a7f3d0 !important;
+  color: #047857 !important;
+}
+
+html.light .bg-indigo-950\/20,
+html.light .bg-indigo-950\/40 {
+  background-color: #eef2ff !important;
+  border-color: #c7d2fe !important;
+  color: #4338ca !important;
+}
+
+html.light .bg-indigo-500\/10 {
+  background-color: #eef2ff !important;
+  border-color: #c7d2fe !important;
+  color: #4f46e5 !important;
+}
+
+html.light .bg-amber-500\/10 {
+  background-color: #fffbeb !important;
+  border-color: #fde68a !important;
+  color: #b45309 !important;
+}
+
+html.light .bg-cyan-500\/10 {
+  background-color: #ecfeff !important;
+  border-color: #a5f3fc !important;
+  color: #0e7490 !important;
+}
+
+/* Preserve bright white text in primary call-to-actions */
 html.light button.bg-indigo-600,
 html.light button.bg-indigo-500,
 html.light a.bg-indigo-600,
 html.light a.bg-indigo-500,
 html.light .bg-indigo-600 .text-white,
 html.light .bg-indigo-700 .text-white,
-html.light .bg-indigo-600 .text-slate-100,
-html.light .group:hover .text-white {
-  color: #ffffff;
+html.light .bg-indigo-600 .text-slate-100 {
+  color: #ffffff !important;
 }
 
-/* Border adjustments for light mode */
+/* Borders in Light Mode */
 html.light [class*="border-white\/"] {
   border-color: #e2e8f0 !important;
 }
 
-/* Soft dark-tinted subtle backgrounds for chips & pills */
+/* Subtle chip backgrounds in Light Mode */
+html.light [class*="bg-white\/0.02"],
 html.light [class*="bg-white\/0.03"],
 html.light [class*="bg-white\/0.04"],
 html.light [class*="bg-white\/0.05"],
@@ -176,32 +287,50 @@ html.light [class*="bg-white\/0.06"] {
 }
 
 html.light [class*="hover:bg-white\/0.08"]:hover,
-html.light [class*="hover:bg-white\/0.05"]:hover {
+html.light [class*="hover:bg-white\/0.05"]:hover,
+html.light [class*="hover:bg-white\/0.06"]:hover {
   background-color: #e2e8f0 !important;
 }
 
-/* AI Assistant in Light Mode */
-html.light .bg-\[\#090b14\]\/95,
-html.light .bg-\[\#0e111e\]\/95 {
-  background-color: rgba(255, 255, 255, 0.98) !important;
+/* Desktop Navbar Navigation Pill */
+html.light nav.bg-\[\#101422\]\/70 {
+  background-color: rgba(255, 255, 255, 0.9) !important;
   border-color: #e2e8f0 !important;
-  box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.2) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04) !important;
 }
 
-html.light .bg-\[\#111422\],
-html.light .bg-\[\#121626\] {
+html.light nav.bg-\[\#101422\]\/70 a {
+  color: #475569 !important;
+}
+
+html.light nav.bg-\[\#101422\]\/70 a:hover {
+  color: #0f172a !important;
   background-color: #f1f5f9 !important;
-  border-color: #e2e8f0 !important;
 }
 
-html.light .bg-\[\#0c0f1c\],
-html.light .bg-\[\#141828\] {
-  background-color: #f8fafc !important;
-  border-color: #e2e8f0 !important;
+/* Form Inputs in Light Mode */
+html.light input,
+html.light textarea {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
 }
 
-html.light .bg-\[\#0a0d18\] {
-  background-color: #f1f5f9 !important;
+html.light input::placeholder,
+html.light textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+html.light input:focus,
+html.light textarea:focus {
+  background-color: #ffffff !important;
+  border-color: #6366f1 !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1) !important;
+}
+
+/* Project Modal in Light Mode */
+html.light .bg-black\/80 {
+  background-color: rgba(15, 23, 42, 0.6) !important;
 }
 
 /* Scrollbar in Light Mode */
@@ -216,3 +345,470 @@ html.light ::-webkit-scrollbar-thumb {
 html.light ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
 }
+
+/* ========================================================
+   PREMIUM MOTION & INTERACTIVE DESIGN SYSTEM
+   ======================================================== */
+
+/* Cinematic Hero Animations */
+@keyframes heroFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroGradientText {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes slowAmbientDrift {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(25px, -20px) scale(1.08);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes subtleFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes launcherGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px -3px rgba(99, 102, 241, 0.45), 0 10px 25px -5px rgba(15, 23, 42, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 32px 2px rgba(99, 102, 241, 0.65), 0 10px 25px -5px rgba(15, 23, 42, 0.5);
+  }
+}
+
+.animate-hero-fade {
+  animation: heroFadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-gradient-text {
+  background-size: 200% auto;
+  animation: heroGradientText 6s ease-in-out infinite;
+}
+
+.animate-ambient-drift {
+  animation: slowAmbientDrift 16s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-subtle-float {
+  animation: subtleFloat 5s ease-in-out infinite;
+}
+
+.animate-launcher-glow {
+  animation: launcherGlow 3.5s ease-in-out infinite;
+}
+
+/* Scroll-Reveal System */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stagger-1 { transition-delay: 80ms; }
+.stagger-2 { transition-delay: 160ms; }
+.stagger-3 { transition-delay: 240ms; }
+.stagger-4 { transition-delay: 320ms; }
+.stagger-5 { transition-delay: 400ms; }
+
+/* 3D Tilt Card Base */
+.tilt-card-container {
+  perspective: 1000px;
+}
+
+.tilt-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.4s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* Spotlight Card Highlight effect via custom properties */
+.spotlight-card {
+  position: relative;
+}
+
+.spotlight-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(
+    400px circle at var(--card-mouse-x, -999px) var(--card-mouse-y, -999px),
+    rgba(99, 102, 241, 0.4),
+    transparent 60%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.spotlight-card:hover::before {
+  opacity: 1;
+}
+
+/* ========================================================
+   REAL GLASSMORPHISM DESIGN SYSTEM - AI CHATBOT
+   ======================================================== */
+
+:root {
+  --glass-chat-bg: linear-gradient(145deg, rgba(16, 21, 40, 0.58) 0%, rgba(8, 11, 24, 0.68) 100%);
+  --glass-chat-blur: 28px;
+  --glass-chat-border: rgba(255, 255, 255, 0.14);
+  --glass-chat-highlight: rgba(255, 255, 255, 0.35);
+  --glass-chat-shadow: 0 28px 70px -15px rgba(0, 0, 0, 0.65), 0 0 45px -10px rgba(99, 102, 241, 0.22), inset 0 1px 1px 0 rgba(255, 255, 255, 0.25);
+  
+  --glass-bubble-ai: rgba(255, 255, 255, 0.05);
+  --glass-bubble-ai-border: rgba(255, 255, 255, 0.12);
+  --glass-bubble-user: linear-gradient(135deg, rgba(99, 102, 241, 0.55) 0%, rgba(139, 92, 246, 0.45) 100%);
+  --glass-bubble-user-border: rgba(165, 180, 252, 0.35);
+  
+  --glass-input-bg: rgba(255, 255, 255, 0.06);
+  --glass-input-border: rgba(255, 255, 255, 0.13);
+}
+
+html.light {
+  --glass-chat-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.72) 0%, rgba(240, 244, 252, 0.78) 100%);
+  --glass-chat-border: rgba(255, 255, 255, 0.85);
+  --glass-chat-highlight: rgba(255, 255, 255, 0.95);
+  --glass-chat-shadow: 0 24px 60px -12px rgba(15, 23, 42, 0.18), 0 0 35px -5px rgba(99, 102, 241, 0.12), inset 0 1px 2px 0 rgba(255, 255, 255, 1);
+  
+  --glass-bubble-ai: rgba(255, 255, 255, 0.78);
+  --glass-bubble-ai-border: rgba(226, 232, 240, 0.85);
+  --glass-bubble-user: linear-gradient(135deg, rgba(99, 102, 241, 0.88) 0%, rgba(79, 70, 229, 0.92) 100%);
+  --glass-bubble-user-border: rgba(129, 140, 248, 0.5);
+  
+  --glass-input-bg: rgba(255, 255, 255, 0.85);
+  --glass-input-border: rgba(203, 213, 225, 0.8);
+}
+
+/* Floating Glass Chat Container */
+.glass-chat-panel,
+.glass-panel {
+  background: var(--glass-chat-bg);
+  backdrop-filter: blur(var(--glass-chat-blur)) saturate(190%);
+  -webkit-backdrop-filter: blur(var(--glass-chat-blur)) saturate(190%);
+  border: 1px solid var(--glass-chat-border);
+  box-shadow: var(--glass-chat-shadow);
+}
+
+/* Floating Chat Dashboard Panel */
+.glass-chat-dashboard {
+  position: fixed !important;
+  bottom: 5.5rem !important; /* ~88px above floating launcher */
+  right: 1.5rem !important;  /* 24px */
+  z-index: 99999 !important;
+  width: 410px;
+  max-width: calc(100vw - 2rem);
+  height: 570px;
+  max-height: min(570px, calc(100dvh - 7rem));
+  display: flex;
+  flex-direction: column;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: var(--glass-chat-shadow), 0 20px 50px -10px rgba(0, 0, 0, 0.5), 0 0 35px -5px rgba(99, 102, 241, 0.25);
+  transform-origin: bottom right;
+}
+
+@media (max-width: 640px) {
+  .glass-chat-dashboard {
+    bottom: 4.75rem !important;
+    right: 0.75rem !important;
+    left: 0.75rem !important;
+    width: auto !important;
+    max-width: none !important;
+    height: calc(100dvh - 5.5rem) !important;
+    max-height: 85dvh !important;
+    border-radius: 1.25rem;
+  }
+}
+
+/* Floating Chat Launcher Container */
+.glass-chat-launcher-container {
+  position: fixed !important;
+  bottom: 1.5rem !important;
+  right: 1.5rem !important;
+  z-index: 99999 !important;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  pointer-events: auto;
+}
+
+@media (max-width: 640px) {
+  .glass-chat-launcher-container {
+    bottom: 0.75rem !important;
+    right: 0.75rem !important;
+  }
+}
+
+/* Smooth Entrance and Exit Animations */
+@keyframes chatPanelOpen {
+  0% {
+    opacity: 0;
+    transform: translateY(18px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes chatPanelClose {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(18px) scale(0.96);
+  }
+}
+
+.animate-chat-open {
+  animation: chatPanelOpen 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-chat-close {
+  animation: chatPanelClose 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  pointer-events: none;
+}
+
+/* Glass panel top specular reflection edge */
+.glass-chat-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.5) 25%, rgba(165, 180, 252, 0.7) 50%, rgba(255, 255, 255, 0.5) 75%, transparent 100%);
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Ambient Corner Light Flare */
+.glass-chat-panel::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle at 100% 0%, rgba(99, 102, 241, 0.22) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Glass Header */
+.glass-chat-header {
+  background: linear-gradient(90deg, rgba(99, 102, 241, 0.12) 0%, rgba(255, 255, 255, 0.03) 50%, rgba(6, 182, 212, 0.08) 100%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--glass-chat-border);
+}
+
+html.light .glass-chat-header {
+  background: linear-gradient(90deg, rgba(238, 242, 255, 0.7) 0%, rgba(255, 255, 255, 0.8) 100%) !important;
+}
+
+/* Glass Message Bubbles */
+.glass-bubble-ai {
+  background: var(--glass-bubble-ai);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-bubble-ai-border);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15), 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+.glass-bubble-user {
+  background: var(--glass-bubble-user);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-bubble-user-border);
+  box-shadow: 0 4px 18px -2px rgba(99, 102, 241, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+/* Glass Input Area */
+.glass-chat-input-bar {
+  background: linear-gradient(180deg, rgba(14, 18, 34, 0.35) 0%, rgba(8, 11, 22, 0.55) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid var(--glass-chat-border);
+}
+
+html.light .glass-chat-input-bar {
+  background: linear-gradient(180deg, rgba(248, 250, 252, 0.7) 0%, rgba(241, 245, 249, 0.85) 100%) !important;
+}
+
+.glass-chat-input-field {
+  background: var(--glass-input-bg);
+  border: 1px solid var(--glass-input-border);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.25s ease;
+}
+
+.glass-chat-input-field:focus-within {
+  border-color: rgba(129, 140, 248, 0.6);
+  box-shadow: 0 0 18px rgba(99, 102, 241, 0.3), inset 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Glass Pill Buttons (Suggested Questions & Actions) */
+.glass-pill-btn {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-pill-btn:hover {
+  background: rgba(99, 102, 241, 0.22);
+  border-color: rgba(165, 180, 252, 0.5);
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  transform: translateY(-1.5px);
+}
+
+html.light .glass-pill-btn {
+  background: rgba(255, 255, 255, 0.8) !important;
+  border-color: rgba(203, 213, 225, 0.8) !important;
+  color: #334155 !important;
+}
+
+html.light .glass-pill-btn:hover {
+  background: #eef2ff !important;
+  border-color: #a5b4fc !important;
+  color: #4338ca !important;
+}
+
+/* Floating Glass Launcher Orb */
+.glass-launcher-orb {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.65) 0%, rgba(129, 140, 248, 0.4) 40%, rgba(6, 182, 212, 0.55) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  box-shadow: 0 10px 32px -4px rgba(99, 102, 241, 0.5), 0 0 20px 2px rgba(99, 102, 241, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.6);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-launcher-orb::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.22) 50%,
+    transparent 60%
+  );
+  animation: glassShimmer 5s infinite;
+  pointer-events: none;
+}
+
+@keyframes glassShimmer {
+  0% { transform: translateX(-100%) rotate(45deg); }
+  25%, 100% { transform: translateX(100%) rotate(45deg); }
+}
+
+/* Light Mode Overrides for Assistant Text Contrast */
+html.light .glass-bubble-ai strong,
+html.light .glass-bubble-ai p,
+html.light .glass-bubble-ai span {
+  color: #0f172a !important;
+}
+
+html.light .glass-bubble-user strong,
+html.light .glass-bubble-user p,
+html.light .glass-bubble-user span {
+  color: #ffffff !important;
+}
+
+/* Modal scale / fade entrance */
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-modal-in {
+  animation: modalIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Accessibility: Prefers Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .tilt-card {
+    transform: none !important;
+  }
+
+  .animate-ambient-drift,
+  .animate-subtle-float,
+  .animate-launcher-glow,
+  .animate-gradient-text,
+  .animate-chat-open,
+  .animate-chat-close,
+  .animate-hero-fade {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+

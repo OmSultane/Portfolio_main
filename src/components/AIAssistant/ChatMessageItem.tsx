@@ -71,22 +71,22 @@ export const ChatMessageItem: React.FC<ChatMessageItemProps> = ({ message, onAct
     >
       {/* Avatar */}
       <div
-        className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 mt-0.5 ${
+        className={`w-7 h-7 rounded-xl flex items-center justify-center shrink-0 mt-0.5 backdrop-blur-md transition-transform ${
           isUser
-            ? 'bg-indigo-600/30 border border-indigo-400/40 text-indigo-300'
-            : 'bg-gradient-to-br from-indigo-900/60 to-cyan-900/40 border border-indigo-500/30 text-indigo-300'
+            ? 'bg-gradient-to-tr from-indigo-500/30 to-violet-500/20 border border-indigo-400/30 text-indigo-200 shadow-sm'
+            : 'bg-gradient-to-tr from-indigo-500/20 to-cyan-500/20 border border-white/15 text-indigo-300 shadow-[0_0_10px_rgba(99,102,241,0.25)]'
         }`}
       >
-        {isUser ? <User className="w-3.5 h-3.5" /> : <Bot className="w-4 h-4 text-indigo-400" />}
+        {isUser ? <User className="w-3.5 h-3.5" /> : <Bot className="w-4 h-4 text-indigo-400 drop-shadow-[0_0_5px_rgba(99,102,241,0.5)]" />}
       </div>
 
       {/* Bubble */}
-      <div className={`max-w-[85%] sm:max-w-[80%] flex flex-col ${isUser ? 'items-end' : 'items-start'}`}>
+      <div className={`max-w-[85%] sm:max-w-[82%] flex flex-col ${isUser ? 'items-end' : 'items-start'}`}>
         <div
-          className={`px-4 py-3 rounded-2xl shadow-sm text-slate-100 ${
+          className={`px-4 py-3 rounded-2xl text-slate-100 transition-all ${
             isUser
-              ? 'bg-gradient-to-r from-indigo-600 to-indigo-700 text-white rounded-tr-sm border border-indigo-500/30'
-              : 'bg-[#111422] border border-white/[0.08] rounded-tl-sm text-slate-200'
+              ? 'glass-bubble-user text-white rounded-tr-xs'
+              : 'glass-bubble-ai text-slate-200 rounded-tl-xs'
           }`}
         >
           {/* Formatted Content */}

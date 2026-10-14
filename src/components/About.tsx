@@ -8,7 +8,7 @@ export const About: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="mb-12">
+        <div className="mb-12 reveal-on-scroll">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-mono uppercase tracking-wider mb-3">
             Overview
           </div>
@@ -21,7 +21,7 @@ export const About: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           
           {/* Main Story / Description Column */}
-          <div className="lg:col-span-7 space-y-4 text-slate-300 text-base leading-relaxed">
+          <div className="lg:col-span-7 space-y-4 text-slate-300 text-base leading-relaxed reveal-on-scroll stagger-1">
             {portfolioConfig.personal.aboutText.map((paragraph, index) => (
               <p key={index} className="text-slate-300">
                 {paragraph}
@@ -48,7 +48,7 @@ export const About: React.FC = () => {
           <div className="lg:col-span-5 grid grid-cols-1 gap-4">
             
             {/* Card 1: Education */}
-            <div className="p-5 rounded-xl bg-[#0f121e]/80 border border-white/[0.08] hover:border-indigo-500/30 transition-all">
+            <div className="p-5 rounded-xl bg-[#0f121e]/80 border border-white/[0.08] hover:border-indigo-500/30 transition-all reveal-on-scroll stagger-1 hover:translate-y-[-2px]">
               <div className="flex items-start gap-4">
                 <div className="p-2.5 rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
                   <GraduationCap className="w-5 h-5" />
@@ -68,7 +68,7 @@ export const About: React.FC = () => {
             </div>
 
             {/* Card 2: Development Experience */}
-            <div className="p-5 rounded-xl bg-[#0f121e]/80 border border-white/[0.08] hover:border-indigo-500/30 transition-all">
+            <div className="p-5 rounded-xl bg-[#0f121e]/80 border border-white/[0.08] hover:border-indigo-500/30 transition-all reveal-on-scroll stagger-2 hover:translate-y-[-2px]">
               <div className="flex items-start gap-4">
                 <div className="p-2.5 rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
                   <Code2 className="w-5 h-5" />
@@ -88,7 +88,7 @@ export const About: React.FC = () => {
             </div>
 
             {/* Card 3: Current Focus */}
-            <div className="p-5 rounded-xl bg-[#0f121e]/80 border border-white/[0.08] hover:border-indigo-500/30 transition-all">
+            <div className="p-5 rounded-xl bg-[#0f121e]/80 border border-white/[0.08] hover:border-indigo-500/30 transition-all reveal-on-scroll stagger-3 hover:translate-y-[-2px]">
               <div className="flex items-start gap-4">
                 <div className="p-2.5 rounded-lg bg-violet-500/10 text-violet-400 border border-violet-500/20">
                   <Target className="w-5 h-5" />

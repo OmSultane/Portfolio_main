@@ -71,7 +71,7 @@ export const Contact: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="mb-12">
+        <div className="mb-12 reveal-on-scroll">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-mono uppercase tracking-wider mb-3">
             Get In Touch
           </div>
@@ -87,7 +87,7 @@ export const Contact: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           
           {/* Left Column: Direct Contact & Info */}
-          <div className="lg:col-span-5 flex flex-col justify-between">
+          <div className="lg:col-span-5 flex flex-col justify-between reveal-on-scroll stagger-1">
             <div className="space-y-6">
               
               {/* Email Card with Copy button */}
@@ -204,7 +204,7 @@ export const Contact: React.FC = () => {
           </div>
 
           {/* Right Column: Contact Form */}
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-7 reveal-on-scroll stagger-2">
             <div className="p-6 sm:p-8 rounded-2xl bg-[#0c0f1a] border border-white/[0.07] shadow-xl">
               <h3 className="text-lg font-bold text-white mb-1">
                 Send a Message

@@ -8,7 +8,7 @@ export const Experience: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="mb-12">
+        <div className="mb-12 reveal-on-scroll">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-mono uppercase tracking-wider mb-3">
             Milestones
           </div>
@@ -23,10 +23,11 @@ export const Experience: React.FC = () => {
 
         {/* Timeline Container */}
         <div className="relative pl-4 sm:pl-8 border-l border-white/[0.1] space-y-12 ml-2 sm:ml-4">
-          {timelineData.map((item) => {
+          {timelineData.map((item, idx) => {
             const isWork = item.type === 'experience';
+            const staggerClass = `stagger-${(idx % 3) + 1}`;
             return (
-              <div key={item.id} className="relative group">
+              <div key={item.id} className={`relative group reveal-on-scroll ${staggerClass}`}>
                 
                 {/* Timeline node icon */}
                 <div className={`absolute -left-[25px] sm:-left-[41px] top-1 p-2 rounded-full border shadow-md transition-all ${
@@ -38,7 +39,7 @@ export const Experience: React.FC = () => {
                 </div>
 
                 {/* Card Container */}
-                <div className="p-6 sm:p-7 rounded-2xl bg-[#0c0f1a] border border-white/[0.07] hover:border-indigo-500/30 transition-all shadow-sm">
+                <div className="p-6 sm:p-7 rounded-2xl bg-[#0c0f1a] border border-white/[0.07] hover:border-indigo-500/30 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg hover:shadow-indigo-950/20 shadow-sm">
                   
                   {/* Header Row */}
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">

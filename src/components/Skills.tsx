@@ -25,7 +25,7 @@ export const Skills: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="mb-12">
+        <div className="mb-12 reveal-on-scroll">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-mono uppercase tracking-wider mb-3">
             Core Competencies
           </div>
@@ -40,15 +40,16 @@ export const Skills: React.FC = () => {
 
         {/* Categories Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {skillCategories.map((cat) => {
+          {skillCategories.map((cat, idx) => {
             const isLearning = cat.id === 'learning';
+            const staggerClass = `stagger-${(idx % 4) + 1}`;
             return (
               <div
                 key={cat.id}
-                className={`rounded-2xl p-6 transition-all border ${
+                className={`reveal-on-scroll ${staggerClass} rounded-2xl p-6 transition-all duration-300 border hover:translate-y-[-2px] ${
                   isLearning
                     ? 'bg-gradient-to-b from-[#101426] to-[#0c0f1d] border-amber-500/20 md:col-span-2 lg:col-span-2 shadow-lg shadow-amber-950/10'
-                    : 'bg-[#0c0f1a]/80 border-white/[0.07] hover:border-indigo-500/30'
+                    : 'bg-[#0c0f1a]/80 border-white/[0.07] hover:border-indigo-500/30 hover:shadow-lg hover:shadow-indigo-950/20'
                 }`}
               >
                 {/* Header */}

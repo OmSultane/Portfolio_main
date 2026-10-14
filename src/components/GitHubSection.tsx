@@ -33,7 +33,7 @@ export const GitHubSection: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 reveal-on-scroll">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-mono uppercase tracking-wider mb-3">
               Open Source & Code
@@ -51,7 +51,7 @@ export const GitHubSection: React.FC = () => {
             href={portfolioConfig.contact.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/[0.08] text-white border border-white/[0.1] text-xs font-semibold transition-all hover:border-indigo-500/40 w-fit"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/[0.08] text-white border border-white/[0.1] text-xs font-semibold transition-all hover:border-indigo-500/40 hover:scale-[1.02] active:scale-[0.98] w-fit"
           >
             <GithubIcon className="w-4 h-4 text-indigo-400" />
             <span>Visit @OmSultane on GitHub</span>
@@ -61,11 +61,13 @@ export const GitHubSection: React.FC = () => {
 
         {/* Repositories Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {featuredRepos.map((repo) => (
-            <div
-              key={repo.name}
-              className="p-6 rounded-2xl bg-[#0c0f1a] border border-white/[0.07] hover:border-indigo-500/40 transition-all flex flex-col justify-between group"
-            >
+          {featuredRepos.map((repo, idx) => {
+            const staggerClass = `stagger-${(idx % 3) + 1}`;
+            return (
+              <div
+                key={repo.name}
+                className={`reveal-on-scroll ${staggerClass} p-6 rounded-2xl bg-[#0c0f1a] border border-white/[0.07] hover:border-indigo-500/40 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg hover:shadow-indigo-950/20 flex flex-col justify-between group`}
+              >
               <div>
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2 text-indigo-400">
@@ -123,7 +125,8 @@ export const GitHubSection: React.FC = () => {
               </div>
 
             </div>
-          ))}
+          );
+        })}
         </div>
 
         {/* Transparent Banner */}

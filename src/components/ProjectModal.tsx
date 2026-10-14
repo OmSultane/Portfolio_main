@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import type { Project } from '../data/projects';
 import { portfolioConfig } from '../config/portfolio';
 import { GithubIcon, LeetCodeIcon, CodeChefIcon } from './Icons';
@@ -10,32 +10,53 @@ interface ProjectModalProps {
 }
 
 export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const previousActiveElement = useRef<HTMLElement | null>(null);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
     };
+
     if (project) {
+      previousActiveElement.current = document.activeElement as HTMLElement;
       document.body.style.overflow = 'hidden';
       window.addEventListener('keydown', handleKeyDown);
+
+      // Focus the close button for accessibility
+      setTimeout(() => {
+        closeButtonRef.current?.focus();
+      }, 50);
     }
+
     return () => {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = '';
       window.removeEventListener('keydown', handleKeyDown);
+      if (previousActiveElement.current) {
+        previousActiveElement.current.focus();
+      }
     };
   }, [project, onClose]);
 
   if (!project) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md animate-fadeIn">
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md transition-opacity duration-200"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="project-modal-title"
+    >
       <div 
-        className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl bg-[#0e111d] border border-white/[0.1] shadow-2xl p-6 sm:p-8"
+        className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl bg-[#0e111d] border border-white/[0.1] shadow-2xl p-6 sm:p-8 animate-modal-in"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
         <button
+          ref={closeButtonRef}
           onClick={onClose}
-          className="absolute top-5 right-5 p-2 rounded-lg bg-white/[0.05] hover:bg-white/[0.1] text-slate-400 hover:text-white transition-colors"
+          className="absolute top-5 right-5 p-2 rounded-lg bg-white/[0.05] hover:bg-white/[0.1] text-slate-400 hover:text-white transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-400"
           aria-label="Close project modal"
         >
           <X className="w-5 h-5" />
@@ -52,7 +73,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
         </div>
 
         {/* Title */}
-        <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">
+        <h3 id="project-modal-title" className="text-2xl sm:text-3xl font-bold text-white mb-2">
           {project.title}
         </h3>
         <p className="text-sm font-medium text-indigo-400 mb-6">

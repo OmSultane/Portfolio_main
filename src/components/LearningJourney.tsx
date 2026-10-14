@@ -47,7 +47,7 @@ export const LearningJourney: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="mb-12">
+        <div className="mb-12 reveal-on-scroll">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-mono uppercase tracking-wider mb-3">
             Roadmap
           </div>
@@ -62,39 +62,42 @@ export const LearningJourney: React.FC = () => {
 
         {/* Roadmap Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {activeLearningItems.map((item, index) => (
-            <div
-              key={index}
-              className="p-6 rounded-2xl bg-[#0c0f1a] border border-white/[0.07] hover:border-indigo-500/30 transition-all flex flex-col justify-between group"
-            >
-              <div>
-                <div className="flex items-center justify-between gap-2 mb-3">
-                  <span className="text-xs font-mono text-indigo-400 font-medium">
-                    {item.category}
-                  </span>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">
-                    {item.status}
-                  </span>
+          {activeLearningItems.map((item, index) => {
+            const staggerClass = `stagger-${(index % 4) + 1}`;
+            return (
+              <div
+                key={index}
+                className={`reveal-on-scroll ${staggerClass} p-6 rounded-2xl bg-[#0c0f1a] border border-white/[0.07] hover:border-indigo-500/30 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg hover:shadow-indigo-950/20 flex flex-col justify-between group`}
+              >
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <span className="text-xs font-mono text-indigo-400 font-medium">
+                      {item.category}
+                    </span>
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">
+                      {item.status}
+                    </span>
+                  </div>
+
+                  <h3 className="text-base font-semibold text-white group-hover:text-indigo-300 transition-colors mb-2">
+                    {item.title}
+                  </h3>
+
+                  <p className="text-xs text-slate-400 leading-relaxed">
+                    {item.description}
+                  </p>
                 </div>
 
-                <h3 className="text-base font-semibold text-white group-hover:text-indigo-300 transition-colors mb-2">
-                  {item.title}
-                </h3>
-
-                <p className="text-xs text-slate-400 leading-relaxed">
-                  {item.description}
-                </p>
+                <div className="mt-5 pt-3.5 border-t border-white/[0.05] flex items-center justify-between text-xs text-slate-400">
+                  <span className="font-mono text-[11px]">Milestone #{index + 1}</span>
+                  <span className="w-2 h-2 rounded-full bg-indigo-500/60 group-hover:bg-indigo-400 transition-colors"></span>
+                </div>
               </div>
-
-              <div className="mt-5 pt-3.5 border-t border-white/[0.05] flex items-center justify-between text-xs text-slate-400">
-                <span className="font-mono text-[11px]">Milestone #{index + 1}</span>
-                <span className="w-2 h-2 rounded-full bg-indigo-500/60 group-hover:bg-indigo-400 transition-colors"></span>
-              </div>
-            </div>
-          ))}
+            );
+          })}
 
           {/* Callout Card */}
-          <div className="p-6 rounded-2xl bg-gradient-to-br from-indigo-950/40 via-[#0e1222] to-[#0a0c16] border border-indigo-500/30 flex flex-col justify-between">
+          <div className="reveal-on-scroll stagger-3 p-6 rounded-2xl bg-gradient-to-br from-indigo-950/40 via-[#0e1222] to-[#0a0c16] border border-indigo-500/30 flex flex-col justify-between hover:translate-y-[-2px] transition-transform duration-300">
             <div>
               <div className="w-10 h-10 rounded-xl bg-indigo-600/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400 mb-4">
                 <Target className="w-5 h-5" />

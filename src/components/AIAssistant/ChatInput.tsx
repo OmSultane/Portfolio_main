@@ -50,8 +50,8 @@ export const ChatInput: React.FC<ChatInputProps> = ({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="relative p-3 border-t border-white/[0.08] bg-[#0c0f1c]">
-      <div className="relative flex items-end rounded-xl bg-[#141828] border border-white/[0.1] focus-within:border-indigo-500/50 transition-colors">
+    <form onSubmit={handleSubmit} className="glass-chat-input-bar relative p-3 shrink-0 z-10">
+      <div className="glass-chat-input-field relative flex items-end rounded-2xl transition-all">
         <textarea
           ref={textareaRef}
           value={input}
@@ -61,7 +61,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
           maxLength={1000}
           rows={1}
           disabled={isLoading}
-          className="w-full resize-none bg-transparent py-2.5 pl-3.5 pr-10 text-xs sm:text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none max-h-28 overflow-y-auto"
+          className="w-full resize-none bg-transparent py-2.5 pl-3.5 pr-11 text-xs sm:text-sm text-slate-100 placeholder:text-slate-400 focus:outline-none max-h-28 overflow-y-auto"
           aria-label="Message input"
         />
 
@@ -70,7 +70,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
             type="submit"
             disabled={!input.trim() || isLoading}
             aria-label="Send message"
-            className="p-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white disabled:opacity-40 disabled:hover:bg-indigo-600 transition-all cursor-pointer disabled:cursor-not-allowed shadow-sm hover:scale-105 active:scale-95"
+            className="p-2 rounded-xl bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-400 hover:to-indigo-500 text-white disabled:opacity-40 disabled:hover:from-indigo-500 disabled:hover:to-indigo-600 transition-all cursor-pointer disabled:cursor-not-allowed shadow-[0_0_12px_rgba(99,102,241,0.4)] hover:scale-105 active:scale-95 border border-white/20"
           >
             {isLoading ? (
               <div className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -81,9 +81,9 @@ export const ChatInput: React.FC<ChatInputProps> = ({
         </div>
       </div>
 
-      <div className="flex items-center justify-between text-[10px] text-slate-500 mt-1.5 px-1 font-mono">
+      <div className="flex items-center justify-between text-[10px] text-slate-400 mt-1.5 px-1 font-mono">
         <span className="flex items-center gap-1 hidden sm:inline-flex">
-          <CornerDownLeft className="w-2.5 h-2.5" />
+          <CornerDownLeft className="w-2.5 h-2.5 text-indigo-400" />
           <span>Press Enter to send, Shift+Enter for new line</span>
         </span>
         <span className="sm:hidden">Press Enter to send</span>
